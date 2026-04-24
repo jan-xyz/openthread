@@ -175,8 +175,8 @@ impl OpenThreadBuilder {
 
         // Increase message buffers for Matter + SRP (default 44 is too small)
         config
-            .cflag("-DOPENTHREAD_CONFIG_NUM_MESSAGE_BUFFERS=128")
-            .cxxflag("-DOPENTHREAD_CONFIG_NUM_MESSAGE_BUFFERS=128");
+            .cflag("-DOPENTHREAD_CONFIG_NUM_MESSAGE_BUFFERS=256")
+            .cxxflag("-DOPENTHREAD_CONFIG_NUM_MESSAGE_BUFFERS=256");
 
         config
             .define("OT_THREAD_VERSION", "1.1")

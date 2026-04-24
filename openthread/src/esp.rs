@@ -62,11 +62,11 @@ impl<'a> EspRadio<'a> {
             },
             pan_id: config.pan_id,
             short_addr: config.short_addr,
-            ext_addr: config.ext_addr,
+            ext_addr: config.ext_addr.map(|a| a.swap_bytes()),
             // The default of 10 is too small for OpenThread,
             // which can have bursts of incoming frames, so we increase it to 50.
             // TODO: See if we can get by with a smaller number to save memory.
-            rx_queue_size: 50,
+            rx_queue_size: 200,
             ..Default::default()
         };
 
@@ -102,6 +102,7 @@ impl Radio for EspRadio<'_> {
 
             self.config = config.clone();
             self.update_driver_config();
+            self.driver.start_receive();
         }
 
         Ok(())
